@@ -1,0 +1,53 @@
+# /var/lib/lxc/akira/config
+
+## Container
+lxc.utsname                             = akira0001
+lxc.rootfs                              = /var/lib/lxc/akira0001/rootfs
+lxc.tty                                 = 4
+lxc.pts                                 = 1024
+#lxc.console                            = /var/log/lxc/.console
+
+## Capabilities
+lxc.cap.drop                            = sys_admin
+
+## Devices
+#lxc.cgroup.devices.allow               = a
+lxc.cgroup.devices.deny                 = a
+# /dev/null
+lxc.cgroup.devices.allow                = c 1:3 rwm
+# /dev/zero
+lxc.cgroup.devices.allow                = c 1:5 rwm
+# /dev/tty[1-4] consoles
+lxc.cgroup.devices.allow                = c 5:1 rwm
+lxc.cgroup.devices.allow                = c 5:0 rwm
+lxc.cgroup.devices.allow                = c 4:0 rwm
+lxc.cgroup.devices.allow                = c 4:1 rwm
+# /dev/{,u}random
+lxc.cgroup.devices.allow                = c 1:9 rwm
+lxc.cgroup.devices.allow                = c 1:8 rwm
+lxc.cgroup.devices.allow                = c 136:* rwm
+lxc.cgroup.devices.allow                = c 5:2 rwm
+# /dev/rtc
+lxc.cgroup.devices.allow                = c 254:0 rwm
+
+## Limits
+lxc.cgroup.cpu.shares                  = 256
+lxc.cgroup.cpuset.cpus                 = 1,3
+lxc.cgroup.memory.limit_in_bytes       = 512M
+lxc.cgroup.memory.memsw.limit_in_bytes = 1G
+lxc.cgroup.memory.swappiness           = 0
+
+## Filesystem
+lxc.mount.entry                         = proc /var/lib/lxc/akira0001/rootfs/proc proc nodev,noexec,nosuid 0 0
+lxc.mount.entry                         = sysfs /var/lib/lxc/akira0001/rootfs/sys sysfs defaults,ro 0 0
+#lxc.mount.entry                        = /srv/ /var/lib/lxc/akira/rootfs/srv/ none defaults,bind 0 0
+
+## Network
+lxc.network.type                        = veth
+lxc.network.flags                       = up
+lxc.network.hwaddr                      = F0:DA:12:34:00:01
+lxc.network.link                        = lxcbr0
+lxc.network.mtu                         = 1500
+lxc.network.name                        = eth0
+lxc.network.veth.pair                   = veth-akira0001
+lxc.network.ipv4                        = 192.168.66.2
