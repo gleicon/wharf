@@ -1,5 +1,5 @@
 # wharf - linux containers automation framework
-#### to provisioning, control and automate your environment
+> to provisioning, control and automate your environment
 
 ### Depends:
 * python - python.org
