@@ -1,7 +1,7 @@
-# wharf
-### Framework to provisioning, control and automate deploy of linux containers
+# wharf - linux containers automation framework
+#### to provisioning, control and automate your environment
 
-#### Depends:
+### Depends:
 * python - python.org
 * lxc - lxc.sourceforge.net
 * cfengine - cfengine.org
