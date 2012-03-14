@@ -19,8 +19,24 @@ class WharfConfig(object):
         return self.config.get(*args, **kwargs)
 
 class Templates(object):
-    def __init__(self):
-        pass
+    def __init__(self, distro):
+        self.distro = distro
+
+    def deploy(self):
+        import self.distro as distro
+        linux = distro.Configure()
+        linux.make_init()
+        linux.make_network()
+        linux.make_hostname()
+        linux.make_hosts()
+        linux.make_devices()
+        linux.os_download()
+        linux.os_copy()
+
+    def remove(self):
+        import self.distro as distro
+        linux = distro.Configure()
+        linux.remove()
 
 class Provisioning(object):
     def __init__(self):
@@ -28,7 +44,7 @@ class Provisioning(object):
 
     def bootstrap(self, **kwargs):
         base_storage = self.config.get('Provisioning', 'base_storage')
-        template = Template()
+        template = Template(kwargs[disto])
         template.deploy(kwargs[disto], kwargs[name])
         lxc_config = ManageConfig()
         lxc_config.add('lxc.network.type', 'veth')
