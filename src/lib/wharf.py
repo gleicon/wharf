@@ -20,7 +20,7 @@ class WharfConfig(object):
 
 class Templates(object):
     def __init__(self, distro):
-        self.distro = distro
+        self.distro, self.function = distro, None
 
     def deploy(self):
         import self.distro as distro
